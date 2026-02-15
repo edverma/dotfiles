@@ -2,6 +2,17 @@ alias claude='claude --dangerously-skip-permissions'
 
 export PATH="$PATH:/snap/bin"
 alias gst='git status'
+alias z='zellij'
+alias zr='zellij-recent'
+codex() {
+    local root
+    root=$(git rev-parse --show-toplevel 2>/dev/null || true)
+    if [ -n "$root" ] && [ -x "$root/scripts/codex-with-slack.sh" ]; then
+        "$root/scripts/codex-with-slack.sh" "$@"
+    else
+        command codex "$@"
+    fi
+}
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
